@@ -3,7 +3,7 @@
 %global debug_package %{nil}
 %endif
 
-Name:     steamdeck-kmod
+Name:     jupiter-kmod
 Version:  {{{ git_dir_version }}}
 Release:  1%{?dist}
 Summary:  Driver exposing various bits and pieces of functionality provided by Steam Deck specific VLV0100 device
@@ -11,6 +11,7 @@ License:  GPLv2
 URL:      https://github.com/KyleGospo/steamdeck-kmod
 
 Source:   %{url}/archive/refs/heads/main.tar.gz
+Source1:  https://gitlab.com/evlaV/linux-integration/-/raw/master/drivers/platform/x86/jupiter.c
 
 BuildRequires: kmodtool
 
@@ -32,12 +33,13 @@ This includes but not limited to:
 # print kmodtool output for debugging purposes:
 kmodtool --target %{_target_cpu} --kmodname %{name} %{?buildforkernels:--%{buildforkernels}} %{?kernels:--for-kernels "%{?kernels}"} 2>/dev/null
 
-%setup -q -c %{name}-main
+%setup -q -c steamdeck-kmod-main
+cp %{SOURCE1} steamdeck-kmod-main/jupiter.c
 
 find . -type f -name '*.c' -exec sed -i "s/#VERSION#/%{version}/" {} \+
 
 for kernel_version  in %{?kernel_versions} ; do
-  cp -a %{name}-main _kmod_build_${kernel_version%%___*}
+  cp -a steamdeck-kmod-main _kmod_build_${kernel_version%%___*}
 done
 
 %build
@@ -48,8 +50,8 @@ done
 %install
 for kernel_version in %{?kernel_versions}; do
  mkdir -p %{buildroot}%{kmodinstdir_prefix}/${kernel_version%%___*}/%{kmodinstdir_postfix}/
- install -D -m 755 _kmod_build_${kernel_version%%___*}/steamdeck.ko %{buildroot}%{kmodinstdir_prefix}/${kernel_version%%___*}/%{kmodinstdir_postfix}/
- chmod a+x %{buildroot}%{kmodinstdir_prefix}/${kernel_version%%___*}/%{kmodinstdir_postfix}/steamdeck.ko
+ install -D -m 755 _kmod_build_${kernel_version%%___*}/jupiter.ko %{buildroot}%{kmodinstdir_prefix}/${kernel_version%%___*}/%{kmodinstdir_postfix}/
+ chmod a+x %{buildroot}%{kmodinstdir_prefix}/${kernel_version%%___*}/%{kmodinstdir_postfix}/jupiter.ko
 done
 %{?akmod_install}
 

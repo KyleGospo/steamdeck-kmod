@@ -1,4 +1,4 @@
-obj-m += steamdeck.o
+obj-m += jupiter.o
 ccflags-y := -std=gnu99 -Wno-declaration-after-statement
 KERNEL_SOURCE_DIR := /lib/modules/$(shell uname -r)/build
 
