@@ -3,7 +3,7 @@
 %global debug_package %{nil}
 %endif
 
-Name:     jupiter-kmod
+Name:     steamdeck-kmod
 Version:  {{{ git_dir_version }}}
 Release:  1%{?dist}
 Summary:  Driver exposing various bits and pieces of functionality provided by Steam Deck specific VLV0100 device
@@ -11,7 +11,10 @@ License:  GPLv2
 URL:      https://github.com/KyleGospo/steamdeck-kmod
 
 Source:   %{url}/archive/refs/heads/main.tar.gz
-Source1:  https://gitlab.com/evlaV/linux-integration/-/raw/master/drivers/platform/x86/jupiter.c
+Source1:  https://gitlab.com/evlaV/linux-integration/-/raw/6.1.29-valve8/drivers/mfd/steamdeck.c
+Source2:  https://gitlab.com/evlaV/linux-integration/-/raw/6.1.29-valve8/drivers/extcon/extcon-steamdeck.c
+Source3:  https://gitlab.com/evlaV/linux-integration/-/raw/6.1.29-valve8/drivers/hwmon/steamdeck-hwmon.c
+Source4:  https://gitlab.com/evlaV/linux-integration/-/raw/6.1.29-valve8/drivers/leds/leds-steamdeck.c
 
 BuildRequires: kmodtool
 
@@ -34,7 +37,10 @@ This includes but not limited to:
 kmodtool --target %{_target_cpu} --kmodname %{name} %{?buildforkernels:--%{buildforkernels}} %{?kernels:--for-kernels "%{?kernels}"} 2>/dev/null
 
 %setup -q -c steamdeck-kmod-main
-cp %{SOURCE1} steamdeck-kmod-main/jupiter.c
+cp %{SOURCE1} steamdeck-kmod-main/steamdeck.c
+cp %{SOURCE2} steamdeck-kmod-main/extcon-steamdeck.c
+cp %{SOURCE3} steamdeck-kmod-main/steamdeck-hwmon.c
+cp %{SOURCE4} steamdeck-kmod-main/leds-steamdeck.c
 
 find . -type f -name '*.c' -exec sed -i "s/#VERSION#/%{version}/" {} \+
 
@@ -50,8 +56,14 @@ done
 %install
 for kernel_version in %{?kernel_versions}; do
  mkdir -p %{buildroot}%{kmodinstdir_prefix}/${kernel_version%%___*}/%{kmodinstdir_postfix}/
- install -D -m 755 _kmod_build_${kernel_version%%___*}/jupiter.ko %{buildroot}%{kmodinstdir_prefix}/${kernel_version%%___*}/%{kmodinstdir_postfix}/
- chmod a+x %{buildroot}%{kmodinstdir_prefix}/${kernel_version%%___*}/%{kmodinstdir_postfix}/jupiter.ko
+ install -D -m 755 _kmod_build_${kernel_version%%___*}/steamdeck.ko %{buildroot}%{kmodinstdir_prefix}/${kernel_version%%___*}/%{kmodinstdir_postfix}/
+ chmod a+x %{buildroot}%{kmodinstdir_prefix}/${kernel_version%%___*}/%{kmodinstdir_postfix}/steamdeck.ko
+ install -D -m 755 _kmod_build_${kernel_version%%___*}/extcon-steamdeck.ko %{buildroot}%{kmodinstdir_prefix}/${kernel_version%%___*}/%{kmodinstdir_postfix}/
+ chmod a+x %{buildroot}%{kmodinstdir_prefix}/${kernel_version%%___*}/%{kmodinstdir_postfix}/extcon-steamdeck.ko
+ install -D -m 755 _kmod_build_${kernel_version%%___*}/steamdeck-hwmon.ko %{buildroot}%{kmodinstdir_prefix}/${kernel_version%%___*}/%{kmodinstdir_postfix}/
+ chmod a+x %{buildroot}%{kmodinstdir_prefix}/${kernel_version%%___*}/%{kmodinstdir_postfix}/steamdeck-hwmon.ko
+ install -D -m 755 _kmod_build_${kernel_version%%___*}/leds-steamdeck.ko %{buildroot}%{kmodinstdir_prefix}/${kernel_version%%___*}/%{kmodinstdir_postfix}/
+ chmod a+x %{buildroot}%{kmodinstdir_prefix}/${kernel_version%%___*}/%{kmodinstdir_postfix}/leds-steamdeck.ko
 done
 %{?akmod_install}
 

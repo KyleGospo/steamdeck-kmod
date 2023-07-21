@@ -1,4 +1,8 @@
-obj-m += jupiter.o
+obj-m += steamdeck.o
+obj-m += extcon-steamdeck.o
+obj-m += steamdeck-hwmon.o
+obj-m += leds-steamdeck.o
+
 ccflags-y := -std=gnu99 -Wno-declaration-after-statement
 KERNEL_SOURCE_DIR := /lib/modules/$(shell uname -r)/build
 
