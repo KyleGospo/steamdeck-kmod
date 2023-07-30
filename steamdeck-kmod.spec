@@ -11,11 +11,11 @@ License:  GPLv2
 URL:      https://github.com/KyleGospo/steamdeck-kmod
 
 Source:   %{url}/archive/refs/heads/main.tar.gz
-Source1:  https://gitlab.com/evlaV/linux-integration/-/raw/6.1.29-valve8/drivers/mfd/steamdeck.c
-Source2:  https://gitlab.com/evlaV/linux-integration/-/raw/6.1.29-valve8/drivers/extcon/extcon-steamdeck.c
-Source3:  https://gitlab.com/evlaV/linux-integration/-/raw/6.1.29-valve8/drivers/hwmon/steamdeck-hwmon.c
-Source4:  https://gitlab.com/evlaV/linux-integration/-/raw/6.1.29-valve8/drivers/leds/leds-steamdeck.c
-Source5:  https://gitlab.com/evlaV/linux-integration/-/raw/6.1.29-valve8/drivers/usb/dwc3/dwc3-pci.c
+Source1:  https://gitlab.com/evlaV/linux-integration/-/raw/6.1/features/steamdeck-mfd/drivers/mfd/steamdeck.c
+Source2:  https://gitlab.com/evlaV/linux-integration/-/raw/6.1/features/steamdeck-mfd/drivers/extcon/extcon-steamdeck.c
+Source3:  https://gitlab.com/evlaV/linux-integration/-/raw/6.1/features/steamdeck-mfd/drivers/hwmon/steamdeck-hwmon.c
+Source4:  https://gitlab.com/evlaV/linux-integration/-/raw/6.1/features/steamdeck-mfd/drivers/leds/leds-steamdeck.c
+Source5:  https://gitlab.com/evlaV/linux-integration/-/raw/6.1/features/steamdeck-mfd/drivers/usb/dwc3/dwc3-pci.c
 Source6:  https://gitlab.com/evlaV/linux-integration/-/raw/6.1/features/iio/drivers/iio/light/ltrf216a.c
 
 BuildRequires: kmodtool
