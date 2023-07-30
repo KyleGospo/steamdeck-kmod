@@ -16,6 +16,7 @@ Source2:  https://gitlab.com/evlaV/linux-integration/-/raw/6.1.29-valve8/drivers
 Source3:  https://gitlab.com/evlaV/linux-integration/-/raw/6.1.29-valve8/drivers/hwmon/steamdeck-hwmon.c
 Source4:  https://gitlab.com/evlaV/linux-integration/-/raw/6.1.29-valve8/drivers/leds/leds-steamdeck.c
 Source5:  https://gitlab.com/evlaV/linux-integration/-/raw/6.1.29-valve8/drivers/usb/dwc3/dwc3-pci.c
+Source6:  https://gitlab.com/evlaV/linux-integration/-/raw/6.1/features/iio/drivers/iio/light/ltrf216a.c
 
 BuildRequires: kmodtool
 
@@ -43,6 +44,7 @@ cp %{SOURCE2} steamdeck-kmod-main/extcon-steamdeck.c
 cp %{SOURCE3} steamdeck-kmod-main/steamdeck-hwmon.c
 cp %{SOURCE4} steamdeck-kmod-main/leds-steamdeck.c
 cp %{SOURCE5} steamdeck-kmod-main/dwc3-pci.c
+cp %{SOURCE6} steamdeck-kmod-main/ltrf216a.c
 
 find . -type f -name '*.c' -exec sed -i "s/#VERSION#/%{version}/" {} \+
 
@@ -68,6 +70,8 @@ for kernel_version in %{?kernel_versions}; do
  chmod a+x %{buildroot}%{kmodinstdir_prefix}/${kernel_version%%___*}/%{kmodinstdir_postfix}/leds-steamdeck.ko
  install -D -m 755 _kmod_build_${kernel_version%%___*}/dwc3-pci.ko %{buildroot}%{kmodinstdir_prefix}/${kernel_version%%___*}/%{kmodinstdir_postfix}/
  chmod a+x %{buildroot}%{kmodinstdir_prefix}/${kernel_version%%___*}/%{kmodinstdir_postfix}/dwc3-pci.ko
+ install -D -m 755 _kmod_build_${kernel_version%%___*}/ltrf216a.ko %{buildroot}%{kmodinstdir_prefix}/${kernel_version%%___*}/%{kmodinstdir_postfix}/
+ chmod a+x %{buildroot}%{kmodinstdir_prefix}/${kernel_version%%___*}/%{kmodinstdir_postfix}/ltrf216a.ko
 done
 %{?akmod_install}
 
