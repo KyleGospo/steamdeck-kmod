@@ -15,7 +15,7 @@ Source1:  https://gitlab.com/evlaV/linux-integration/-/raw/6.1/features/steamdec
 Source2:  https://gitlab.com/evlaV/linux-integration/-/raw/6.1/features/steamdeck-mfd/drivers/extcon/extcon-steamdeck.c
 Source3:  https://gitlab.com/evlaV/linux-integration/-/raw/6.1/features/steamdeck-mfd/drivers/hwmon/steamdeck-hwmon.c
 Source4:  https://gitlab.com/evlaV/linux-integration/-/raw/6.1/features/steamdeck-mfd/drivers/leds/leds-steamdeck.c
-Source5:  https://gitlab.com/evlaV/linux-integration/-/raw/6.1/features/steamdeck-mfd/drivers/usb/dwc3/dwc3-pci.c
+Source5:  https://gitlab.com/evlaV/linux-integration/-/raw/6.1.29-valve8/drivers/usb/dwc3/dwc3-pci.c
 
 BuildRequires: kmodtool
 
