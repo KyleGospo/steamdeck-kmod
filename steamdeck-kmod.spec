@@ -11,11 +11,11 @@ License:  GPLv2
 URL:      https://github.com/KyleGospo/steamdeck-kmod
 
 Source:   %{url}/archive/refs/heads/main.tar.gz
-Source1:  https://gitlab.com/evlaV/linux-integration/-/raw/6.1.52-valve4/drivers/mfd/steamdeck.c
-Source2:  https://gitlab.com/evlaV/linux-integration/-/raw/6.1.52-valve4/drivers/extcon/extcon-steamdeck.c
-Source3:  https://gitlab.com/evlaV/linux-integration/-/raw/6.1.52-valve4/drivers/hwmon/steamdeck-hwmon.c
-Source4:  https://gitlab.com/evlaV/linux-integration/-/raw/6.1.52-valve4/drivers/leds/leds-steamdeck.c
-Source5:  https://gitlab.com/evlaV/linux-integration/-/raw/6.1.52-valve4/drivers/usb/dwc3/dwc3-pci.c
+Source1:  https://gitlab.com/evlaV/linux-integration/-/raw/6.1.52-valve9/drivers/mfd/steamdeck.c
+Source2:  https://gitlab.com/evlaV/linux-integration/-/raw/6.1.52-valve9/drivers/extcon/extcon-steamdeck.c
+Source3:  https://gitlab.com/evlaV/linux-integration/-/raw/6.1.52-valve9/drivers/hwmon/steamdeck-hwmon.c
+Source4:  https://gitlab.com/evlaV/linux-integration/-/raw/6.1.52-valve9/drivers/leds/leds-steamdeck.c
+Source5:  https://gitlab.com/evlaV/linux-integration/-/raw/6.1.52-valve9/drivers/usb/dwc3/dwc3-pci.c
 
 BuildRequires: kmodtool
 
